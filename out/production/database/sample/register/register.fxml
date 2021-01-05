@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import java.lang.String?>
+
+<BorderPane fx:id="register_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.register.register">
+   <top>
+      <AnchorPane prefHeight="110.0" prefWidth="700.0" style="-fx-background-color: #45AFE6;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="227.0" layoutY="37.0" prefHeight="17.0" prefWidth="247.0" text="User's registration">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </top>
+   <bottom>
+      <AnchorPane prefHeight="50.0" prefWidth="700.0" style="-fx-background-color: #45AFE6;" BorderPane.alignment="CENTER" />
+   </bottom>
+   <center>
+      <AnchorPane prefHeight="340.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="name" layoutX="270.0" layoutY="29.0" />
+            <TextField fx:id="tel" layoutX="270.0" layoutY="83.0" />
+            <Label layoutX="169.0" layoutY="34.0" text="Name" />
+            <Label layoutX="169.0" layoutY="88.0" text="Mobile_number" />
+            <Label layoutX="169.0" layoutY="135.0" text="Password" />
+            <Label layoutX="145.0" layoutY="195.0" text="Confirm_password" />
+            <Button fx:id="register" layoutX="271.0" layoutY="240.0" mnemonicParsing="false" onAction="#register" prefHeight="27.0" prefWidth="160.0" style="-fx-background-color: #0598ff;" text="Register" />
+            <Button fx:id="cancel" layoutX="271.0" layoutY="292.0" mnemonicParsing="false" onAction="#cancel" prefHeight="27.0" prefWidth="163.0" style="-fx-background-color: #0598ff;" text="Cancel" />
+            <Label layoutX="447.0" layoutY="88.0" text="Email" />
+            <TextField fx:id="email" layoutX="496.0" layoutY="83.0" />
+            <Label layoutX="447.0" layoutY="34.0" text="Gender" />
+            <PasswordField fx:id="password" layoutX="271.0" layoutY="130.0" />
+            <PasswordField fx:id="confirm_password" layoutX="272.0" layoutY="190.0" />
+            <Button fx:id="upload_image" layoutX="505.0" layoutY="292.0" mnemonicParsing="false" onAction="#upload_image" prefHeight="27.0" prefWidth="143.0" style="-fx-background-color: #0598ff;" text="Upload" />
+            <ImageView fx:id="photo" fitHeight="150.0" fitWidth="200.0" layoutX="477.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
+            <ComboBox fx:id="gender" layoutX="501.0" layoutY="29.0" onAction="#gender" prefWidth="150.0" />
+
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
