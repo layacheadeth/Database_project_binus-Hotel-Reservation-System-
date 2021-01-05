@@ -126,6 +126,7 @@ public class condition {
     }
 
     public void initialize(){
+        System.out.print("Hello world");
         ObservableList<Integer> list= FXCollections.observableArrayList(1,2,3,4,5,6,7,8,9,10);
         num_adult.setItems(list);
         num_child.setItems(list);
