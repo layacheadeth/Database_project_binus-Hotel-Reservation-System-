@@ -116,7 +116,10 @@ public class listing {
     void movie() {
         try{
             book.getScene().getWindow().hide();
-            Parent root=FXMLLoader.load(getClass().getResource("../main/main.fxml"));
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("../main/main.fxml"));
+            Parent root=loader.load();
+            sample.main.mainController u=loader.getController();
+            u.init_data(user_text.getText(),pass_text.getText());
             Stage stage=new Stage();
             stage.setResizable(false);
             stage.setTitle("book");
@@ -132,7 +135,10 @@ public class listing {
     void save() {
         try{
             save.getScene().getWindow().hide();
-            Parent root=FXMLLoader.load(getClass().getResource("../save/save_sample.fxml"));
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("../save/save_sample.fxml"));
+            Parent root=loader.load();
+            sample.save.save u=loader.getController();
+            u.init_data(user_text.getText(),pass_text.getText());
             Stage stage=new Stage();
             stage.setResizable(false);
             stage.setTitle("book");
