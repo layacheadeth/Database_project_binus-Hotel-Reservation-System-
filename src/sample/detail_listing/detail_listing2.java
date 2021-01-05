@@ -79,6 +79,7 @@ public class detail_listing2 {
     @FXML
     void book_now() {
         try{
+            book_now.getScene().getWindow().hide();
             Stage stage=new Stage();
             FXMLLoader loader=new FXMLLoader();
             loader.setLocation(getClass().getResource("../condition/condition.fxml"));
@@ -87,7 +88,7 @@ public class detail_listing2 {
             c.init_data(L_id.getText());
             stage.setTitle("Login");
             stage.setResizable(false);
-            stage.setScene(new Scene(tableViewParent,700,500));
+            stage.setScene(new Scene(tableViewParent,600,500));
             stage.show();
 
         }

@@ -162,20 +162,10 @@ public class listing {
         }
     }
 
-//    public void initialize() throws SQLException {
-//        try {
-//            con = da.getDbconnection();
-//            data= FXCollections.observableArrayList();
-//            setCelltable();
-//            loaddatabase(null);
-//        }
-//        catch (Exception e){
-//            System.out.print(e.getMessage());
-//        }
-//        finally {
-//            pst.close();
-//        }
-//    }
+    public void initialize(){
+      user_text.setVisible(false);
+      pass_text.setVisible(false);
+    }
 
 
 

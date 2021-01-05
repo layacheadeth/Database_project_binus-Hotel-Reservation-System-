@@ -219,7 +219,7 @@ public class mainController {
                     emp1photo.setImage(image);
                     emp1photo.setFitHeight(80);
                     emp1photo.setFitWidth(80);
-                    data.add(new Hotel(emp1photo, result.getInt(1), result.getString(2), result.getString(3), result.getString(4), result.getString(5), result.getInt(6), result.getDouble(7)));
+                    data.add(new Hotel(emp1photo,result.getInt(1),result.getString(2),result.getString(3), (int) result.getDouble(4),result.getString(6),result.getString(7),result.getString(8),result.getInt(9),result.getString(10)));
                 }
                 tableHotel.setItems(data);
 
@@ -288,7 +288,7 @@ public class mainController {
             checkout de=loader.getController();
             de.init_data(tableHotel.getSelectionModel().getSelectedItem());
             stage.setResizable(false);
-            stage.setScene(new Scene(tableViewParent,500,500));
+            stage.setScene(new Scene(tableViewParent,700,500));
             stage.show();
 
         }
@@ -355,7 +355,7 @@ public class mainController {
                emp1photo.setImage(image);
                emp1photo.setFitHeight(80);
                emp1photo.setFitWidth(80);
-               data.add(new Hotel(emp1photo,result.getInt(1),result.getString(2),result.getString(3),result.getString(4),result.getString(5),result.getInt(6),result.getDouble(7),result.getString(9),result.getString(10)));
+               data.add(new Hotel(emp1photo,result.getInt(1),result.getString(2),result.getString(3), (int) result.getDouble(4),result.getString(6),result.getString(7),result.getString(8),result.getInt(9),result.getString(10)));
            }
             tableHotel.setItems(data) ;
         }

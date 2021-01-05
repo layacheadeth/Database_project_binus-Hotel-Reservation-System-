@@ -182,6 +182,7 @@ public class user_setting {
         }
         catch (Exception e){
             System.out.print(e.getMessage());
+
         }
         finally {
             pst.close();

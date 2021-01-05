@@ -2,17 +2,17 @@ package sample.condition;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import sample.database.Hotel;
+import javafx.event.*;
 import sample.database.database_handler;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import sample.database.*;
 
-public class condition {
+public class condition_save {
 
     @FXML
     private DatePicker date_in;
@@ -26,51 +26,49 @@ public class condition {
     @FXML
     private ComboBox<Integer> num_adult;
 
+    @FXML
+    private Button submit;
+
+    @FXML
+    private Label id;
 
     private Connection con=null;
     private PreparedStatement pst=null;
     private ResultSet result=null;
     database_handler da=new database_handler();
 
-    @FXML
-    private Label id;
-
-    private String id_1;
-
     private Hotel selected_hotel;
 
 
-
-    public void init_data(String id_1){
-        this.id_1=id_1;
-        id.setText(id_1);
+    public void init_data(Hotel hotel){
+        selected_hotel=hotel;
+        id.setText(String.valueOf(selected_hotel.getId()));
     }
-
     @FXML
-    void date_in() {
-
-    }
-
-    @FXML
-    void date_out() {
+    void date_in(ActionEvent event) {
 
     }
 
     @FXML
-    void num_adult() {
+    void date_out(ActionEvent event) {
 
     }
 
     @FXML
-    void num_child() {
+    void num_adult(ActionEvent event) {
+
+    }
+
+    @FXML
+    void num_child(ActionEvent event) {
 
     }
 
     public void submit_result(){
         String sql="insert into hotel\n" +
-                "select real_Listing.id,real_Listing.hotel,real_Listing.location,real_Listing.price,real_Listing.image,real_Listing.roomtype,\n" +
-                "booking_time.check_in,booking_time.check_out,booking_time.amount_of_people,booking_time.status\n" +
-                " from real_Listing inner join booking_time on real_Listing.id=booking_time.listing_id where real_Listing.id=?";
+                "select Listing.id,Listing.hotel,Listing.location,Listing.price,Listing.image,Listing.roomtype,\n" +
+                "booking_time_save.check_in,booking_time_save.check_out,booking_time_save.amount_of_people,booking_time_save.status\n" +
+                " from Listing inner join booking_time_save on Listing.id=booking_time_save.listing_id where Listing.id=?";
         try{
             con=da.getDbconnection();
             pst=con.prepareStatement(sql);
@@ -95,9 +93,8 @@ public class condition {
 
 
     @FXML
-    void submit() {
-
-        String sql="insert into booking_time(id,check_in,check_out,num_child,num_adult,listing_id,status,amount_of_people) values(?,?,?,?,?,?,?,?)";
+    void submit(ActionEvent event) {
+        String sql="insert into booking_time_save(id,check_in,check_out,num_child,num_adult,listing_id,status,amount_of_people) values(?,?,?,?,?,?,?,?)";
         try{
             con=da.getDbconnection();
             pst=con.prepareStatement(sql);
@@ -126,7 +123,6 @@ public class condition {
             System.out.print(e.getMessage());
         }
         submit_result();
-
     }
 
     public void initialize(){
@@ -137,6 +133,5 @@ public class condition {
         id.setVisible(false);
 
     }
-
 
 }

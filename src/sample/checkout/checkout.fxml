@@ -38,11 +38,6 @@
             <TextField fx:id="card_zip" layoutX="14.0" layoutY="320.0" prefHeight="27.0" prefWidth="148.0" promptText="Zip/Postal Code" />
             <Button fx:id="success" layoutX="14.0" layoutY="400.0" mnemonicParsing="false" onAction="#success" prefHeight="27.0" prefWidth="306.0" style="-fx-background-color: #0598ff;" text="Complete payment" />
             <Button fx:id="cancel" layoutX="14.0" layoutY="436.0" mnemonicParsing="false" onAction="#cancel" prefHeight="27.0" prefWidth="306.0" style="-fx-background-color: #0598ff;" text="Cancel" />
-            <Label fx:id="valid_name" layoutX="14.0" layoutY="168.0" text="Label" />
-            <Label fx:id="valid_number" layoutX="14.0" layoutY="233.0" text="Label" />
-            <Label fx:id="valid_date" layoutX="14.0" layoutY="289.0" text="Label" />
-            <Label fx:id="valid_security" layoutX="175.0" layoutY="289.0" text="Label" />
-            <Label fx:id="valid_zip" layoutX="14.0" layoutY="347.0" text="Label" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

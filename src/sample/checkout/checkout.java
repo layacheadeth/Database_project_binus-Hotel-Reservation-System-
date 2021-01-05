@@ -37,21 +37,6 @@ public class checkout {
     private TextField card_zip;
 
     @FXML
-    private Label valid_name;
-
-    @FXML
-    private Label valid_number;
-
-    @FXML
-    private Label valid_date;
-
-    @FXML
-    private Label valid_security;
-
-    @FXML
-    private Label valid_zip;
-
-    @FXML
     private Button success;
 
     @FXML
@@ -92,12 +77,10 @@ public class checkout {
 
     @FXML
     void success(ActionEvent event) {
-        boolean iscard_name_empty=validation.isTextfieldnotempty(card_name,valid_name,"name is required");
-        boolean iscard_number_empty=validation.isTextfieldnotempty(card_number,valid_number,"number is required");
-        boolean iscard_date_empty=validation.isTextfieldnotempty(card_date,valid_date,"date is required");
-        boolean iscard_sc_number_empty=validation.isTextfieldnotempty(card_sc_number,valid_security,"security number is required");
-        boolean iscard_zip_empty=validation.isTextfieldnotempty(card_zip,valid_zip,"zip is required");
-
+        String regex = "[0-9]+";
+        String regex1="^[a-zA-Z]+$";
+        String regext2="^[0-3]?[0-9]/[0-3]?[0-9]/(?:[0-9]{2})?[0-9]{2}$";
+        String regex3="^[0-9]{3,4}$";
 
         String s_card_name=card_name.getText();
         String s_card_number=card_number.getText();
@@ -112,9 +95,44 @@ public class checkout {
             alert1.setHeaderText("Error found");
             alert1.setContentText("all field must be filled in");
             alert1.showAndWait();
-
+        }
+        else if(!(card_number.getText().matches(regex))){
+            Alert alert1=new Alert(Alert.AlertType.ERROR);
+            alert1.setTitle("Error");
+            alert1.setHeaderText("Error found");
+            alert1.setContentText("card_number must consist of only number");
+            alert1.showAndWait();
+        }
+        else if(!(card_name.getText().matches(regex1))){
+            Alert alert1=new Alert(Alert.AlertType.ERROR);
+            alert1.setTitle("Error");
+            alert1.setHeaderText("Error found");
+            alert1.setContentText("card_name must consist of only charactor or letter");
+            alert1.showAndWait();
+        }
+        else if(!(card_date.getText().matches(regext2))){
+            Alert alert1=new Alert(Alert.AlertType.ERROR);
+            alert1.setTitle("Error");
+            alert1.setHeaderText("Error found");
+            alert1.setContentText("card_date must be in mm/yyyy format");
+            alert1.showAndWait();
+        }
+        else if(!(card_sc_number.getText().matches(regex3))){
+            Alert alert1=new Alert(Alert.AlertType.ERROR);
+            alert1.setTitle("Error");
+            alert1.setHeaderText("Error found");
+            alert1.setContentText("card_cvc number must be in 3 or 4 digit format of number ");
+            alert1.showAndWait();
+        }
+        else if(!(card_zip.getText().matches(regex3))){
+            Alert alert1=new Alert(Alert.AlertType.ERROR);
+            alert1.setTitle("Error");
+            alert1.setHeaderText("Error found");
+            alert1.setContentText("card_zip number must be in 3 or 4 digit format of number ");
+            alert1.showAndWait();
 
         }
+
         else if(!s){
             String sql="update hotel set status=\"paid\" where hotel=?";
             try{
@@ -134,8 +152,13 @@ public class checkout {
             }catch (Exception e){
                 System.out.print(e.getMessage());
             }
-
         }
 
+
+
+
+
     }
+
+
 }

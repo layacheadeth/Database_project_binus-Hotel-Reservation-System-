@@ -1,5 +1,6 @@
 package sample.database;
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Hotel {
@@ -24,6 +25,19 @@ public class Hotel {
         this.price = price;
         this.image=image;
         this.roomtype=roomtype;
+        this.status=status;
+    }
+
+    public Hotel(ImageView image,int id,String hotel,String location,int price,String roomtype,String check_in,String check_out,int amount_of_people,String status){
+        this.image=image;
+        this.id=id;
+        this.hotel=hotel;
+        this.location=location;
+        this.price=price;
+        this.roomtype=roomtype;
+        this.check_in=check_in;
+        this.check_out=check_out;
+        this.amount_of_people=amount_of_people;
         this.status=status;
     }
 

@@ -19,6 +19,10 @@
             <Font size="31.0" />
          </font>
       </Label>
-      <Label fx:id="id" layoutX="270.0" layoutY="65.0" text="Label" />
+      <Label fx:id="id" disable="true" layoutX="270.0" layoutY="65.0" text="Label" />
+      <Label layoutX="57.0" layoutY="74.0" text="Check_in" />
+      <Label layoutX="57.0" layoutY="149.0" text="num_children" />
+      <Label layoutX="316.0" layoutY="149.0" text="num_adult" />
+      <Label layoutX="316.0" layoutY="74.0" text="Check_out" />
    </children>
 </AnchorPane>

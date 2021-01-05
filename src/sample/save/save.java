@@ -16,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import sample.condition.condition;
 import sample.database.Hotel;
 import sample.database.database_handler;
 import sample.main.*;
@@ -32,6 +33,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javafx.scene.control.*;
 import sample.hotel.*;
+import sample.condition.*;
 
 
 public class save {
@@ -95,6 +97,8 @@ public class save {
 
     @FXML
     private Label pass;
+
+    private Hotel selected_hotel;
 
 
 
@@ -261,6 +265,22 @@ public class save {
     @FXML
     void book_act() {
 
+        try{
+            Stage stage=new Stage();
+            FXMLLoader loader=new FXMLLoader();
+            loader.setLocation(getClass().getResource("../condition/condition_save.fxml"));
+            Parent tableViewParent=loader.load();
+            condition_save c=loader.getController();
+            c.init_data(tableHotel.getSelectionModel().getSelectedItem());
+            stage.setTitle("Login");
+            stage.setResizable(false);
+            stage.setScene(new Scene(tableViewParent,600,500));
+            stage.show();
+
+        }
+        catch (Exception e){
+            System.out.print(e.getMessage());
+        }
     }
 
 
