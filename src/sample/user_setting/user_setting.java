@@ -170,6 +170,7 @@ public class user_setting {
 
 
     public void loadUser_pass(String user,String pass) throws SQLException{
+        System.out.print("Hello world");
         txt_name.setText(user);
         txt_password.setText(pass);
         try {
