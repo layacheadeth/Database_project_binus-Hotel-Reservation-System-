@@ -70,10 +70,21 @@ public class detail_listing2 {
 
     private File file;
 
+    @FXML
+    private Label current_user;
+
 
 
     @FXML
     private TextArea text_area;
+
+    private String user;
+
+    public void init_data1(String user){
+        this.user=user;
+        current_user.setText(user);
+    }
+
 
 
     @FXML
@@ -85,7 +96,7 @@ public class detail_listing2 {
             loader.setLocation(getClass().getResource("../condition/condition.fxml"));
             Parent tableViewParent=loader.load();
             condition c=loader.getController();
-            c.init_data(L_id.getText());
+            c.init_data(L_id.getText(),current_user.getText());
             stage.setTitle("Login");
             stage.setResizable(false);
             stage.setScene(new Scene(tableViewParent,600,500));
@@ -171,12 +182,41 @@ public class detail_listing2 {
 
     }
 
+    private void input_user(){
+        String user=current_user.getText();
+        String id=L_id.getText();
+        String sql="insert into host_user(name,listing_id) values(?,?)";
+
+        try{
+            con=da.getDbconnection();
+            pst=con.prepareStatement(sql);
+            pst.setString(1,user);
+            pst.setString(2,id);
+            int i=pst.executeUpdate();
+            if(i==1){
+                System.out.print("Success");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Message");
+                alert.setHeaderText("Information");
+                alert.setContentText("Success");
+                alert.showAndWait();
+            }
+
+        }catch (Exception e){
+            System.out.print(e.getMessage());
+        }
+
+    }
+
+
     @FXML
     void save_now() {
 
+        input_user();
+
         String sql="INSERT INTO listing\n" +
-                "SELECT *\n" +
-                "FROM real_Listing\n" +
+                "SELECT real_Listing.*,host_user.name\n" +
+                "FROM real_Listing inner join host_user on real_Listing.id=host_user.listing_id\n" +
                 "WHERE hotel =? ";
 
         try{

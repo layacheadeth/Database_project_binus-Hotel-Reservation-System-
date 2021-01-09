@@ -74,6 +74,7 @@
                         <Label fx:id="pass" layoutX="359.0" layoutY="64.0" text="Label" />
                         <Label layoutX="435.0" layoutY="64.0" text="Status" />
                         <Label fx:id="status_type" layoutX="511.0" layoutY="64.0" text="Label" />
+                        <Button fx:id="refresh" layoutX="14.0" layoutY="59.0" mnemonicParsing="false" onAction="#refresh" style="-fx-background-color: #0598ff;" text="refresh" />
                      </children>
                   </AnchorPane>
                   <TableView fx:id="tableHotel" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">

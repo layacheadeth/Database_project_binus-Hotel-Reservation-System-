@@ -274,6 +274,7 @@ public class listing {
                 Parent tableViewParent=loader.load();
                 detail_listing2 de=loader.getController();
                 de.init_data(tableHotel.getSelectionModel().getSelectedItem());
+                de.init_data1(user_text.getText());
                 stage.setTitle("save");
                 stage.setResizable(false);
                 stage.setScene(new Scene(tableViewParent, 640, 630));

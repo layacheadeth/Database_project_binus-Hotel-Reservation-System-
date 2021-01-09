@@ -75,8 +75,9 @@
                         <TextField fx:id="txt_password" layoutX="166.0" layoutY="152.0" />
                         <TextField fx:id="txt_confirm_pass" layoutX="166.0" layoutY="190.0" />
                         <TextField fx:id="txt_gender" layoutX="427.0" layoutY="22.0" />
-                        <Button fx:id="update" layoutX="166.0" layoutY="255.0" mnemonicParsing="false" onAction="#update" prefHeight="27.0" prefWidth="163.0" style="-fx-background-color: #0598ff;" text="Update" />
+                        <Button fx:id="update" layoutX="166.0" layoutY="255.0" mnemonicParsing="false" onAction="#update" prefHeight="27.0" prefWidth="163.0" style="-fx-background-color: #0598ff;" text="Update(with photo)" />
                         <Label fx:id="Label_id" layoutX="381.0" layoutY="66.0" text="Label" />
+                        <Button fx:id="update_text" layoutX="384.0" layoutY="255.0" mnemonicParsing="false" onAction="#update_text" prefHeight="27.0" prefWidth="138.0" style="-fx-background-color: #0598ff;" text="update(text only)" />
                      </children>
                   </AnchorPane>
                   <TableView fx:id="tableuser" prefHeight="200.0" prefWidth="200.0">

@@ -19,6 +19,7 @@ import sample.Controller;
 import sample.database.Hotel;
 import sample.database.User;
 import sample.database.database_handler;
+import javafx.event.*;
 
 
 import java.awt.image.BufferedImage;
@@ -97,6 +98,9 @@ public class user_setting {
     @FXML
     private Label Label_id;
 
+
+    @FXML
+    private Button update_text;
 
 
     private Connection con=null;
@@ -329,7 +333,6 @@ public class user_setting {
     @FXML
     void update() {
         String sql="update user set name=?,gender=?,tel=?,email=?,password=?,confirm_password=?,photo=? where id = ?";
-
         FileInputStream fin=null;
         try {
             fin = new FileInputStream(file);
@@ -362,6 +365,92 @@ public class user_setting {
         }catch (Exception e){
             System.out.print(e.getMessage());
         }
+        update_listing1_name();
+        update_hotel1_name();
+    }
+
+    public void update_hotel1_name(){
+        String sql="update hotel set name=? where name=? ";
+        try{
+            con=da.getDbconnection();
+            pst=con.prepareStatement(sql);
+            pst.setString(1,txt_name.getText());
+            pst.setString(2,txt_name.getText());
+            int i=pst.executeUpdate();
+            if (i == 1) {
+                System.out.print("Success");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Message");
+                alert.setHeaderText("Information");
+                alert.setContentText("Update success");
+                alert.showAndWait();
+            }
+
+        }catch (Exception e){
+            System.out.print(e.getMessage());
+        }
+
+    }
+
+    public void update_listing1_name(){
+        String sql="update listing set name=? where name=?";
+        try{
+            con=da.getDbconnection();
+            pst=con.prepareStatement(sql);
+            pst.setString(1,txt_name.getText());
+            pst.setString(2,txt_name.getText());
+            int i=pst.executeUpdate();
+            if (i == 1) {
+                System.out.print("Success");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Message");
+                alert.setHeaderText("Information");
+                alert.setContentText("Update success");
+                alert.showAndWait();
+            }
+
+        }catch (Exception e){
+            System.out.print(e.getMessage());
+        }
+    }
+
+    @FXML
+    void update_text(ActionEvent event) {
+        String sql="update user set name=?,gender=?,tel=?,email=?,password=?,confirm_password=? where id = ?";
+        if(txt_password.getText()!=txt_confirm_pass.getText()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Message");
+            alert.setHeaderText("error");
+            alert.setContentText("password and confirm_password must be the same");
+            alert.showAndWait();
+
+        }
+        try{
+            con=da.getDbconnection();
+            pst=con.prepareStatement(sql);
+            pst.setString(1,txt_name.getText());
+            pst.setString(2,txt_gender.getText());
+            pst.setString(3,txt_tel.getText());
+            pst.setString(4,txt_email.getText());
+            pst.setString(5,txt_password.getText());
+            pst.setString(6,txt_confirm_pass.getText());
+            pst.setString(7,Label_id.getText());
+
+            int i=pst.executeUpdate();
+            if (i == 1) {
+                System.out.print("Success");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Message");
+                alert.setHeaderText("Information");
+                alert.setContentText("Update success");
+                alert.showAndWait();
+            }
+
+        }catch (Exception e){
+            System.out.print(e.getMessage());
+        }
+        update_listing1_name();
+        update_hotel1_name();
     }
 
 

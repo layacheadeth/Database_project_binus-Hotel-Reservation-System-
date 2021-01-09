@@ -84,6 +84,9 @@ public class mainController {
     private Button checkout;
 
     @FXML
+    private Button refresh;
+
+    @FXML
     private TableView<Hotel> tableHotel;
 
     @FXML
@@ -174,8 +177,18 @@ public class mainController {
    public void init_data(String text1,String text2){
         user.setText(text1);
         pass.setText(text2);
-        user.setVisible(false);
         pass.setVisible(false);
+       try {
+           con = da.getDbconnection();
+           data=FXCollections.observableArrayList();
+           setCelltable();
+           loaddatabase(text1);
+           setCelltable_to_Textfield();
+       }
+       catch (Exception e){
+           System.out.print(e.getMessage());
+       }
+
 
    }
 
@@ -201,7 +214,7 @@ public class mainController {
     @FXML
     void search_by_char() throws SQLException {
             data.clear();
-            String sql = "Select * From Hotel where hotel LIKE '%" + txt_search.getText() + "%'";
+            String sql = "Select * From Hotel where hotel LIKE '%" + txt_search.getText() + "%' AND name= '"+user.getText()+"'";
             try {
                 con=da.getDbconnection();
                 pst = con.prepareStatement(sql);
@@ -261,7 +274,7 @@ public class mainController {
                 a.setTitle("Delete");
                 a.setHeaderText("Delete success");
                 a.setContentText("Delete successfully");
-                loaddatabase();
+                loaddatabase(user.getText());
                 txt_hotel.clear();
                 txt_location.clear();
                 txt_price.clear();
@@ -297,14 +310,13 @@ public class mainController {
         }
     }
 
-//    public void loadUser_pass(String user,String pass) throws SQLException{
+
+//    public void initialize() throws SQLException{
 //        try {
 //            con = da.getDbconnection();
-//            data= FXCollections.observableArrayList();
+//            data=FXCollections.observableArrayList();
 //            setCelltable();
 //            loaddatabase();
-//            System.out.print(user);
-//            System.out.print(pass);
 //            setCelltable_to_Textfield();
 //        }
 //        catch (Exception e){
@@ -315,22 +327,6 @@ public class mainController {
 //        }
 //    }
 
-    public void initialize() throws SQLException{
-        try {
-            con = da.getDbconnection();
-            data=FXCollections.observableArrayList();
-            setCelltable();
-            loaddatabase();
-            setCelltable_to_Textfield();
-        }
-        catch (Exception e){
-            System.out.print(e.getMessage());
-        }
-        finally {
-            pst.close();
-        }
-    }
-
     public void setCelltable(){
         column_hotel.setCellValueFactory(new PropertyValueFactory<>("hotel"));
         column_checkin.setCellValueFactory(new PropertyValueFactory<>("check_in"));
@@ -338,9 +334,10 @@ public class mainController {
         column_people.setCellValueFactory(new PropertyValueFactory<>("amount_of_people"));
         column_price.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
-    public void loaddatabase(){
+    public void loaddatabase(String hotel ){
+        String sql="select * from hotel where name = '"+hotel+"'";
         try{
-           pst=con.prepareStatement("select * from Hotel");
+           pst=con.prepareStatement(sql);
            result=pst.executeQuery();
            while (result.next()){
                InputStream bodyOut = result.getBinaryStream("image");
@@ -403,9 +400,10 @@ public class mainController {
         }
     }
 
-
-
-
-
+    @FXML
+    void refresh() {
+        data.clear();
+        loaddatabase(user.getText());
+    }
 
 }

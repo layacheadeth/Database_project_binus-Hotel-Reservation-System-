@@ -14,6 +14,7 @@ public class Hotel {
     private String roomtype;
     private ImageView image;
     private String status;
+    private String user;
 
     public Hotel(ImageView image,int id,String hotel, String location,String check_in, String check_out, int amount_of_people, double price,String roomtype,String status) {
         this.id=id;
@@ -71,6 +72,23 @@ public class Hotel {
         this.roomtype=roomtype;
     }
 
+    public Hotel(ImageView image,int id,String hotel,String location,double price, String roomtype,String user){
+        this.id=id;
+        this.hotel=hotel;
+        this.location=location;
+        this.price=price;
+        this.image=image;
+        this.roomtype=roomtype;
+        this.user=user;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
 
     public int getId(){
         return id;

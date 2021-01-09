@@ -26,6 +26,9 @@ public class condition {
     @FXML
     private ComboBox<Integer> num_adult;
 
+    @FXML
+    private Label user_text;
+
 
     private Connection con=null;
     private PreparedStatement pst=null;
@@ -38,12 +41,16 @@ public class condition {
     private String id_1;
 
     private Hotel selected_hotel;
+    private String user_text1;
 
 
 
-    public void init_data(String id_1){
+    public void init_data(String id_1,String user_text1){
         this.id_1=id_1;
         id.setText(id_1);
+        this.user_text1=user_text1;
+        user_text.setText(user_text1);
+
     }
 
     @FXML
@@ -69,12 +76,13 @@ public class condition {
     public void submit_result(){
         String sql="insert into hotel\n" +
                 "select real_Listing.id,real_Listing.hotel,real_Listing.location,real_Listing.price,real_Listing.image,real_Listing.roomtype,\n" +
-                "booking_time.check_in,booking_time.check_out,booking_time.amount_of_people,booking_time.status\n" +
-                " from real_Listing inner join booking_time on real_Listing.id=booking_time.listing_id where real_Listing.id=?";
+                "booking_time.check_in,booking_time.check_out,booking_time.amount_of_people,booking_time.status,booking_time.name\n" +
+                " from real_Listing inner join booking_time on real_Listing.id=booking_time.listing_id where real_Listing.id=? AND name=?";
         try{
             con=da.getDbconnection();
             pst=con.prepareStatement(sql);
             pst.setInt(1,Integer.parseInt(id.getText()));
+            pst.setString(2,user_text.getText());
             int i=pst.executeUpdate();
             if(i==1){
                 System.out.print("Success");
@@ -97,7 +105,7 @@ public class condition {
     @FXML
     void submit() {
 
-        String sql="insert into booking_time(id,check_in,check_out,num_child,num_adult,listing_id,status,amount_of_people) values(?,?,?,?,?,?,?,?)";
+        String sql="insert into booking_time(id,check_in,check_out,num_child,num_adult,listing_id,status,amount_of_people,name) values(?,?,?,?,?,?,?,?,?)";
         try{
             con=da.getDbconnection();
             pst=con.prepareStatement(sql);
@@ -109,6 +117,7 @@ public class condition {
             pst.setString(6,id.getText());
             pst.setString(7,"booked");
             pst.setInt(8,(num_adult.getValue()+num_child.getValue()));
+            pst.setString(9,user_text.getText());
             int i=pst.executeUpdate();
             if(i==1){
                 System.out.print("Success");

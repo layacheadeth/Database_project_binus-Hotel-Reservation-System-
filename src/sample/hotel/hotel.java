@@ -46,17 +46,6 @@ public class hotel {
     @FXML
     private TextField destination;
 
-    @FXML
-    private DatePicker txt_checkin;
-
-    @FXML
-    private ComboBox<Integer> adult;
-
-    @FXML
-    private ComboBox<Integer> children;
-
-    @FXML
-    private DatePicker txt_checkout;
 
     private ObservableList<Hotel> data;
 
@@ -192,12 +181,6 @@ public class hotel {
 
     }
 
-    public void initialize(){
-        ObservableList<Integer> list=FXCollections.observableArrayList(1,2,3,4,5,6,7,8,9,10);
-        adult.setItems(list);
-        children.setItems(list);
-
-    }
 
 
 

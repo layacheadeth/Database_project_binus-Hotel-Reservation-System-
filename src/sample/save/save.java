@@ -100,6 +100,23 @@ public class save {
 
     private Hotel selected_hotel;
 
+    public void init_data(String user_text,String pass_text){
+        user.setText(user_text);
+        pass.setText(pass_text);
+        pass.setVisible(false);
+        try {
+            con = da.getDbconnection();
+            data= FXCollections.observableArrayList();
+            setCelltable();
+            loaddatabase(user_text);
+            setCelltable_to_Textfield();
+        }
+        catch (Exception e){
+            System.out.print(e.getMessage());
+        }
+    }
+
+
 
 
     @FXML
@@ -141,7 +158,6 @@ public class save {
 
     @FXML
     void movie() {
-
         try{
             movie.getScene().getWindow().hide();
             Stage stage=new Stage();
@@ -164,18 +180,19 @@ public class save {
 
     }
 
-    public void initialize(){
-        try {
-            con = da.getDbconnection();
-            data= FXCollections.observableArrayList();
-            setCelltable();
-            loaddatabase();
-            setCelltable_to_Textfield();
-        }
-        catch (Exception e){
-            System.out.print(e.getMessage());
-        }
-    }
+//    public void initialize(){
+//
+//        try {
+//            con = da.getDbconnection();
+//            data= FXCollections.observableArrayList();
+//            setCelltable();
+//            loaddatabase();
+//            setCelltable_to_Textfield();
+//        }
+//        catch (Exception e){
+//            System.out.print(e.getMessage());
+//        }
+//    }
 
     public void setCelltable(){
         column_hotel.setCellValueFactory(new PropertyValueFactory<>("hotel"));
@@ -186,10 +203,13 @@ public class save {
         column_roomtype.setCellValueFactory(new PropertyValueFactory<>("roomtype"));
     }
 
-    public void loaddatabase(){
 
+    public void loaddatabase(String user){
+        String sql="select * from listing where name = '"+user+"'";
+        String sql1="select * from listing";
             try{
-                pst=con.prepareStatement("select * from Listing");
+//                pst=con.prepareStatement("select * from Listing where name=?");
+                pst=con.prepareStatement(sql);
                 result=pst.executeQuery();
                 while (result.next()){
                     InputStream bodyOut = result.getBinaryStream("image");
@@ -229,17 +249,13 @@ public class save {
         }
     }
 
-    public void init_data(String user_text,String pass_text){
-        user.setText(user_text);
-        pass.setText(pass_text);
-        user.setVisible(false);
-        pass.setVisible(false);
-    }
 
     @FXML
     void remove() throws SQLException {
         data.clear();
-        String sql="Delete from listing where hotel = ?";
+        String sql="alter table listing nocheck constraint all" +"\n"+
+                "Delete from listing where hotel = ?" +"\n"+
+                "alter table listing check constraint all";
         try{
             con=da.getDbconnection();
             pst=con.prepareStatement(sql);
@@ -251,7 +267,7 @@ public class save {
                 a.setTitle("Delete");
                 a.setHeaderText("Delete success");
                 a.setContentText("Delete successfully");
-                loaddatabase();
+                loaddatabase(user.getText());
             }
         }
         catch (Exception e){
@@ -271,7 +287,7 @@ public class save {
             loader.setLocation(getClass().getResource("../condition/condition_save.fxml"));
             Parent tableViewParent=loader.load();
             condition_save c=loader.getController();
-            c.init_data(tableHotel.getSelectionModel().getSelectedItem());
+            c.init_data(tableHotel.getSelectionModel().getSelectedItem(),user.getText());
             stage.setTitle("Login");
             stage.setResizable(false);
             stage.setScene(new Scene(tableViewParent,600,500));
@@ -310,7 +326,8 @@ public class save {
     @FXML
     void search() throws SQLException {
         data.clear();
-        String sql = "Select * From listing where hotel LIKE '%" + txt_name.getText() + "%'";
+//        String sql = "Select * From listing where hotel LIKE '%" + txt_name.getText() + "%' AND name='"+user.getText()+"'";
+        String sql = "Select * From listing where hotel LIKE '%" + txt_name.getText() + "%' AND name= '"+user.getText()+"'";
         try {
             con=da.getDbconnection();
             pst = con.prepareStatement(sql);

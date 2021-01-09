@@ -50,5 +50,7 @@
       </AnchorPane>
       <Button fx:id="book_now" layoutX="432.0" layoutY="579.0" mnemonicParsing="false" onAction="#book_now" prefHeight="27.0" prefWidth="153.0" style="-fx-background-color: #0598ff;" text="Book" />
       <Button fx:id="save_now" layoutX="118.0" layoutY="579.0" mnemonicParsing="false" onAction="#save_now" prefHeight="27.0" prefWidth="145.0" style="-fx-background-color: #0598ff;" text="Save" />
+      <Label layoutX="432.0" layoutY="6.0" text="Current_User:" />
+      <Label fx:id="current_user" layoutX="532.0" layoutY="6.0" text="Label" />
    </children>
 </AnchorPane>
