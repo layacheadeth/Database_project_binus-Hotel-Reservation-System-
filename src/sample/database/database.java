@@ -1,14 +1,5 @@
 package sample.database;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.TableView;
-
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-
 public class database {
 
     protected String dbHost="localhost";

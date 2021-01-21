@@ -79,6 +79,12 @@ public class listing {
     @FXML
     private Label pass_text;
 
+    @FXML
+    private Label label_id;
+
+    @FXML
+    private Label name_id;
+
 
     @FXML
     private Button goback;
@@ -119,7 +125,7 @@ public class listing {
             FXMLLoader loader=new FXMLLoader(getClass().getResource("../main/main.fxml"));
             Parent root=loader.load();
             sample.main.mainController u=loader.getController();
-            u.init_data(user_text.getText(),pass_text.getText());
+            u.init_data(user_text.getText(),pass_text.getText(),label_id.getText());
             Stage stage=new Stage();
             stage.setResizable(false);
             stage.setTitle("book");
@@ -138,7 +144,7 @@ public class listing {
             FXMLLoader loader=new FXMLLoader(getClass().getResource("../save/save_sample.fxml"));
             Parent root=loader.load();
             sample.save.save u=loader.getController();
-            u.init_data(user_text.getText(),pass_text.getText());
+            u.init_data(user_text.getText(),pass_text.getText(),label_id.getText());
             Stage stage=new Stage();
             stage.setResizable(false);
             stage.setTitle("book");
@@ -150,10 +156,16 @@ public class listing {
 
     }
 
+    public void init_data1(String id){
+        label_id.setText(id);
+    }
+
     public void init_data(String hotelName,String text, String text1) throws SQLException{
         selected_hotel=hotelName;
         user_text.setText(text);
         pass_text.setText(text1);
+
+
         try {
             con = da.getDbconnection();
             data= FXCollections.observableArrayList();
@@ -274,7 +286,7 @@ public class listing {
                 Parent tableViewParent=loader.load();
                 detail_listing2 de=loader.getController();
                 de.init_data(tableHotel.getSelectionModel().getSelectedItem());
-                de.init_data1(user_text.getText());
+                de.init_data1(user_text.getText(),label_id.getText());
                 stage.setTitle("save");
                 stage.setResizable(false);
                 stage.setScene(new Scene(tableViewParent, 640, 630));
@@ -295,7 +307,7 @@ public class listing {
             loader.setLocation(getClass().getResource("../hotel/hotel.fxml"));
             Parent tableViewParent=loader.load();
             hotel h=loader.getController();
-            h.init_data(user_text.getText(),pass_text.getText());
+            h.init_data(user_text.getText(),pass_text.getText(),label_id.getText());
             stage.setTitle("user_setting");
             stage.setResizable(false);
             stage.setScene(new Scene(tableViewParent, 900, 700));
@@ -314,6 +326,7 @@ public class listing {
             Parent root=loader.load();
             sample.user_setting.user_setting u=loader.getController();
             u.loadUser_pass(user_text.getText(),pass_text.getText());
+            u.init_data(label_id.getText());
             user_text.setVisible(false);
             pass_text.setVisible(false);
             stage.setTitle("user_setting");

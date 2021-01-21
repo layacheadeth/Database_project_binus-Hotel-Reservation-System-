@@ -83,6 +83,9 @@ public class save {
     @FXML
     private TextField txt_name;
 
+    @FXML
+    private Label label_id;
+
 
     private Connection con=null;
     private PreparedStatement pst=null;
@@ -100,10 +103,11 @@ public class save {
 
     private Hotel selected_hotel;
 
-    public void init_data(String user_text,String pass_text){
+    public void init_data(String user_text,String pass_text,String id){
         user.setText(user_text);
         pass.setText(pass_text);
         pass.setVisible(false);
+        label_id.setText(id);
         try {
             con = da.getDbconnection();
             data= FXCollections.observableArrayList();
@@ -127,7 +131,7 @@ public class save {
             FXMLLoader loader=new FXMLLoader(this.getClass().getResource("../hotel/hotel.fxml"));
             Parent root=(Parent)loader.load();
             hotel h=loader.getController();
-            h.init_data(user.getText(),pass.getText());
+            h.init_data(user.getText(),pass.getText(),label_id.getText());
             stage.setTitle("Hotel");
             stage.setScene(new Scene(root,900,700));
             stage.show();
@@ -164,7 +168,7 @@ public class save {
             FXMLLoader loader=new FXMLLoader(this.getClass().getResource("../main/main.fxml"));
             Parent root=(Parent)loader.load();
             mainController mc=loader.getController();
-            mc.init_data(user.getText(),pass.getText());
+            mc.init_data(user.getText(),pass.getText(),label_id.getText());
             stage.setTitle("Main");
             stage.setResizable(false);
             stage.setScene(new Scene(root, 900, 700));
@@ -287,7 +291,7 @@ public class save {
             loader.setLocation(getClass().getResource("../condition/condition_save.fxml"));
             Parent tableViewParent=loader.load();
             condition_save c=loader.getController();
-            c.init_data(tableHotel.getSelectionModel().getSelectedItem(),user.getText());
+            c.init_data(tableHotel.getSelectionModel().getSelectedItem(),user.getText(),label_id.getText());
             stage.setTitle("Login");
             stage.setResizable(false);
             stage.setScene(new Scene(tableViewParent,600,500));
@@ -312,6 +316,7 @@ public class save {
             Parent root=(Parent)loader.load();
             sample.user_setting.user_setting ue=loader.getController();
             ue.loadUser_pass(user.getText(),pass.getText());
+            ue.init_data(label_id.getText());
 
             stage.setTitle("user_setting");
             stage.setResizable(false);

@@ -25,5 +25,6 @@
       <Label layoutX="316.0" layoutY="149.0" text="num_adult" />
       <Label layoutX="316.0" layoutY="74.0" text="Check_out" />
       <Label fx:id="user_save" layoutX="410.0" layoutY="65.0" text="user" />
+      <Label fx:id="name_id" layoutX="151.0" layoutY="65.0" text="Label" />
    </children>
 </AnchorPane>

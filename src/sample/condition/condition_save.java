@@ -33,6 +33,9 @@ public class condition_save {
     private Label id;
 
     @FXML
+    private Label name_id;
+
+    @FXML
     private Label user_save;
 
     private Connection con=null;
@@ -44,10 +47,14 @@ public class condition_save {
     private String name;
 
 
-    public void init_data(Hotel hotel,String name){
+
+
+    public void init_data(Hotel hotel,String name,String id2){
         selected_hotel=hotel;
         id.setText(String.valueOf(selected_hotel.getId()));
         user_save.setText(name);
+        name_id.setText(id2);
+
     }
     @FXML
     void date_in(ActionEvent event) {
@@ -72,7 +79,7 @@ public class condition_save {
     public void submit_result(){
         String sql="insert into hotel\n" +
                 "select Listing.id,Listing.hotel,Listing.location,Listing.price,Listing.image,Listing.roomtype,\n" +
-                "booking_time_save.check_in,booking_time_save.check_out,booking_time_save.amount_of_people,booking_time_save.status,booking_time_save.name\n" +
+                "booking_time_save.check_in,booking_time_save.check_out,booking_time_save.amount_of_people,booking_time_save.status,booking_time_save.name,booking_time_save.name_id\n" +
                 " from Listing inner join booking_time_save on Listing.id=booking_time_save.listing_id where Listing.id=?";
         try{
             con=da.getDbconnection();
@@ -99,7 +106,7 @@ public class condition_save {
 
     @FXML
     void submit(ActionEvent event) {
-        String sql="insert into booking_time_save(id,check_in,check_out,num_child,num_adult,listing_id,status,amount_of_people,name) values(?,?,?,?,?,?,?,?,?)";
+        String sql="insert into booking_time_save(id,check_in,check_out,num_child,num_adult,listing_id,status,amount_of_people,name,name_id) values(?,?,?,?,?,?,?,?,?,?)";
         try{
             con=da.getDbconnection();
             pst=con.prepareStatement(sql);
@@ -112,6 +119,7 @@ public class condition_save {
             pst.setString(7,"booked");
             pst.setInt(8,(num_adult.getValue()+num_child.getValue()));
             pst.setString(9,user_save.getText());
+            pst.setString(10,name_id.getText());
             int i=pst.executeUpdate();
             if(i==1){
                 System.out.print("Success");

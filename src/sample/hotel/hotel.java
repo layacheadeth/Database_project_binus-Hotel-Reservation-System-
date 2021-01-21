@@ -55,6 +55,9 @@ public class hotel {
     @FXML
     private Label user;
 
+    @FXML
+    private Label label_id;
+
 
     private Connection con=null;
     private PreparedStatement pst=null;
@@ -71,7 +74,7 @@ public class hotel {
             FXMLLoader loader=new FXMLLoader(getClass().getResource("../main/main.fxml"));
             Parent root=loader.load();
             mainController m=loader.getController();
-            m.init_data(user.getText(),pass.getText());
+            m.init_data(user.getText(),pass.getText(),label_id.getText());
             stage.setTitle("Main");
             stage.setResizable(false);
             stage.setScene(new Scene(root, 900, 700));
@@ -91,11 +94,12 @@ public class hotel {
     String pass_username;
     String pass_password;
 
-    public void init_data(String username,String password){
+    public void init_data(String username,String password,String id){
         pass_username=username;
         pass_password=password;
         pass.setText(password);
         user.setText(username);
+        label_id.setText(id);
         user.setVisible(false);
         pass.setVisible(false);
 
@@ -126,7 +130,7 @@ public class hotel {
             FXMLLoader loader=new FXMLLoader(getClass().getResource("../save/save_sample.fxml"));
             Parent root=loader.load();
             save s=loader.getController();
-            s.init_data(user.getText(),pass.getText());
+            s.init_data(user.getText(),pass.getText(),label_id.getText());
             stage.setTitle("save");
             stage.setResizable(false);
             stage.setScene(new Scene(root, 900, 700));
@@ -146,6 +150,7 @@ public class hotel {
             Parent root=loader.load();
             user_setting u=loader.getController();
             u.loadUser_pass(user.getText(),pass.getText());
+            u.init_data(label_id.getText());
             stage.setTitle("user_setting");
             stage.setResizable(false);
             stage.setScene(new Scene(root, 900, 700));
@@ -170,6 +175,7 @@ public class hotel {
             Parent tableViewParent=loader.load();
             listing li=loader.getController();
             li.init_data(destination_text,user.getText(),pass.getText());
+            li.init_data1(label_id.getText());
             stage.setTitle("save");
             stage.setResizable(false);
             stage.setScene(new Scene(tableViewParent,900,700));

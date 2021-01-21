@@ -75,6 +75,7 @@ public class user_setting {
     private TextField txt_gender;
 
 
+
     @FXML
     private TableView<User> tableuser;
 
@@ -118,7 +119,7 @@ public class user_setting {
             FXMLLoader loader=new FXMLLoader(getClass().getResource("../main/main.fxml"));
             Parent root=loader.load();
             mainController mc=loader.getController();
-            mc.init_data(txt_name.getText(),txt_password.getText());
+            mc.init_data(txt_name.getText(),txt_password.getText(),Label_id.getText());
             stage.setScene(new Scene(root,900,700));
             stage.setResizable(false);
             stage.show();
@@ -137,7 +138,7 @@ public class user_setting {
             FXMLLoader loader=new FXMLLoader(getClass().getResource("../hotel/hotel.fxml"));
             Parent root=loader.load();
             hotel h=loader.getController();
-            h.init_data(txt_name.getText(),txt_password.getText());
+            h.init_data(txt_name.getText(),txt_password.getText(),Label_id.getText());
             stage.setScene(new Scene(root,900,700));
             stage.setResizable(false);
             stage.show();
@@ -171,6 +172,11 @@ public class user_setting {
 
     }
 
+    public void init_data(String id){
+        Label_id.setText(id);
+    }
+
+
 
 
     public void loadUser_pass(String user,String pass) throws SQLException{
@@ -201,7 +207,7 @@ public class user_setting {
             FXMLLoader loader=new FXMLLoader(getClass().getResource("../save/save_sample.fxml"));
             Parent root=loader.load();
             save s=loader.getController();
-            s.init_data(txt_name.getText(),txt_password.getText());
+            s.init_data(txt_name.getText(),txt_password.getText(),Label_id.getText());
             stage.setScene(new Scene(root,900,700));
             stage.setResizable(false);
             stage.show();
@@ -247,6 +253,7 @@ public class user_setting {
                 data.add(new User(result.getInt(1),result.getString(2),result.getString(3),result.getString(4),result.getString(5),result.getString(6),result.getString(7) ));
             }
             tableuser.setItems(data) ;
+
         }
         catch (Exception e){
             System.out.print(e.getMessage());
@@ -365,17 +372,15 @@ public class user_setting {
         }catch (Exception e){
             System.out.print(e.getMessage());
         }
-        update_listing1_name();
         update_hotel1_name();
     }
 
     public void update_hotel1_name(){
-        String sql="update hotel set name=? where name=? ";
+        String sql="update hotel,listing set name=? where id=name_id";
         try{
             con=da.getDbconnection();
             pst=con.prepareStatement(sql);
             pst.setString(1,txt_name.getText());
-            pst.setString(2,txt_name.getText());
             int i=pst.executeUpdate();
             if (i == 1) {
                 System.out.print("Success");
@@ -392,27 +397,7 @@ public class user_setting {
 
     }
 
-    public void update_listing1_name(){
-        String sql="update listing set name=? where name=?";
-        try{
-            con=da.getDbconnection();
-            pst=con.prepareStatement(sql);
-            pst.setString(1,txt_name.getText());
-            pst.setString(2,txt_name.getText());
-            int i=pst.executeUpdate();
-            if (i == 1) {
-                System.out.print("Success");
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Message");
-                alert.setHeaderText("Information");
-                alert.setContentText("Update success");
-                alert.showAndWait();
-            }
 
-        }catch (Exception e){
-            System.out.print(e.getMessage());
-        }
-    }
 
     @FXML
     void update_text(ActionEvent event) {
@@ -449,7 +434,7 @@ public class user_setting {
         }catch (Exception e){
             System.out.print(e.getMessage());
         }
-        update_listing1_name();
+
         update_hotel1_name();
     }
 

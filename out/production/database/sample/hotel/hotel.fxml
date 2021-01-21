@@ -49,6 +49,7 @@
             </Label>
             <Label fx:id="pass" layoutX="283.0" layoutY="569.0" text="Label" />
             <Label fx:id="user" layoutX="201.0" layoutY="569.0" text="Label" />
+            <Label fx:id="label_id" layoutX="346.0" layoutY="569.0" text="Label" />
          </children>
       </AnchorPane>
    </center>

@@ -42,15 +42,17 @@ public class condition {
 
     private Hotel selected_hotel;
     private String user_text1;
+    @FXML
+    private Label name_id;
 
 
 
-    public void init_data(String id_1,String user_text1){
+    public void init_data(String id_1,String user_text1,String id2){
         this.id_1=id_1;
         id.setText(id_1);
         this.user_text1=user_text1;
         user_text.setText(user_text1);
-
+        name_id.setText(id2);
     }
 
     @FXML
@@ -76,7 +78,7 @@ public class condition {
     public void submit_result(){
         String sql="insert into hotel\n" +
                 "select real_Listing.id,real_Listing.hotel,real_Listing.location,real_Listing.price,real_Listing.image,real_Listing.roomtype,\n" +
-                "booking_time.check_in,booking_time.check_out,booking_time.amount_of_people,booking_time.status,booking_time.name\n" +
+                "booking_time.check_in,booking_time.check_out,booking_time.amount_of_people,booking_time.status,booking_time.name,booking_time.name_id\n" +
                 " from real_Listing inner join booking_time on real_Listing.id=booking_time.listing_id where real_Listing.id=? AND name=?";
         try{
             con=da.getDbconnection();
@@ -92,6 +94,15 @@ public class condition {
                 alert.setContentText("Success");
                 alert.showAndWait();
             }
+            else{
+                System.out.print("Error");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Message");
+                alert.setHeaderText("Error");
+                alert.setContentText("this room has been boked by other user");
+                alert.showAndWait();
+
+            }
             pst.close();
             result.close();
 
@@ -105,7 +116,7 @@ public class condition {
     @FXML
     void submit() {
 
-        String sql="insert into booking_time(id,check_in,check_out,num_child,num_adult,listing_id,status,amount_of_people,name) values(?,?,?,?,?,?,?,?,?)";
+        String sql="insert into booking_time(id,check_in,check_out,num_child,num_adult,listing_id,status,amount_of_people,name,name_id) values(?,?,?,?,?,?,?,?,?,?)";
         try{
             con=da.getDbconnection();
             pst=con.prepareStatement(sql);
@@ -118,6 +129,7 @@ public class condition {
             pst.setString(7,"booked");
             pst.setInt(8,(num_adult.getValue()+num_child.getValue()));
             pst.setString(9,user_text.getText());
+            pst.setString(10,id.getText());
             int i=pst.executeUpdate();
             if(i==1){
                 System.out.print("Success");

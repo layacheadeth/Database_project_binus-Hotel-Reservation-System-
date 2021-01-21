@@ -63,6 +63,7 @@
             <Button fx:id="goback" layoutX="342.0" layoutY="577.0" mnemonicParsing="false" onAction="#goback" prefHeight="27.0" prefWidth="210.0" style="-fx-background-color: #0598ff;" text="Goback" />
             <Label fx:id="user_text" layoutX="38.0" layoutY="94.0" text="Label" />
             <Label fx:id="pass_text" layoutX="102.0" layoutY="94.0" text="Label" />
+            <Label fx:id="label_id" layoutX="181.0" layoutY="94.0" text="Label" />
          </children>
       </AnchorPane>
    </center>

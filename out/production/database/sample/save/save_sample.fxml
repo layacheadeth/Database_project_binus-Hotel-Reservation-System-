@@ -93,6 +93,7 @@
             <TextField fx:id="txt_name" layoutX="52.0" layoutY="571.0" onKeyPressed="#search" />
             <Label fx:id="user" layoutX="225.0" layoutY="576.0" text="Label" />
             <Label fx:id="pass" layoutX="279.0" layoutY="576.0" text="Label" />
+            <Label fx:id="label_id" layoutX="14.0" layoutY="576.0" text="Label" />
          </children>
       </AnchorPane>
    </center>

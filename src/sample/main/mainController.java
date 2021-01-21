@@ -106,6 +106,9 @@ public class mainController {
 
     private ObservableList<Hotel> data;
 
+    @FXML
+    private Label label_id;
+
 
     private Connection con=null;
     private PreparedStatement pst=null;
@@ -127,7 +130,7 @@ public class mainController {
             FXMLLoader loader=new FXMLLoader(this.getClass().getResource("../hotel/hotel.fxml"));
             Parent root=(Parent)loader.load();
             hotel h=loader.getController();
-            h.init_data(user.getText(),pass.getText());
+            h.init_data(user.getText(),pass.getText(),label_id.getText());
             stage.setTitle("Hotel");
             stage.setResizable(false);
             stage.setScene(new Scene(root,900,700));
@@ -164,7 +167,7 @@ public class mainController {
             FXMLLoader loader=new FXMLLoader(this.getClass().getResource("../save/save_sample.fxml"));
             Parent root=(Parent)loader.load();
             save s=loader.getController();
-            s.init_data(user.getText(),pass.getText());
+            s.init_data(user.getText(),pass.getText(),label_id.getText());
             stage.setTitle("save");
             stage.setResizable(false);
             stage.setScene(new Scene(root, 900, 700));
@@ -174,9 +177,10 @@ public class mainController {
         }
     }
 
-   public void init_data(String text1,String text2){
+   public void init_data(String text1,String text2,String id){
         user.setText(text1);
         pass.setText(text2);
+        label_id.setText(id);
         pass.setVisible(false);
        try {
            con = da.getDbconnection();
@@ -200,6 +204,7 @@ public class mainController {
             Parent root=(Parent)loader.load();
             user_setting ue=loader.getController();
             ue.loadUser_pass(user.getText(),pass.getText());
+            ue.init_data(label_id.getText());
             Stage stage=new Stage();
             stage.setTitle("user_setting");
             stage.setResizable(false);
